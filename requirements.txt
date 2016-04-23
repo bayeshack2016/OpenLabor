@@ -1,6 +1,0 @@
-Flask
-Flask-SQLAlchemy
-SQLAlchemy
-psycopg2
-sqlalchemy-migrate
-gunicorn
