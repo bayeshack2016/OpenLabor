@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <title>OpenLabor</title>
+
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://api.glassdoor.com/api/api.htm?t.p=62299&t.k=bFtWtvzAmSI&userip=208.90.215.204&useragent=Mozilla/5.0&format=json&v=1&action=jobs-stats&returnCities=true&admLevelRequested=2&country=USA&radius=5&fromAge=7&state=illinois&city=chicago&q=dishwasher',
+                    dataType: 'jsonp',
+                    type: 'GET',
+                    contentType: "application/json",
+                
+                    success: function(dataWeGotViaJsonp){                        
+                        var text = '';
+                        var len = dataWeGotViaJsonp.response.cities.length;                        
+                        for(var i=0;i<len;i++){
+                            items = dataWeGotViaJsonp.response.cities[i];                            
+                            text += '<a href="#!" class="collection-item">' + items.name + '<span class="new badge">'
+                            text += items.numJobs + '</span></a>'
+                        }
+
+                        $('#glassdoor_job_count').html(text);
+                    }
+                    ,
+                    error: function(e) {
+                      console.log(e.message);
+                    }
+                });
+            })
+        </script>
+
+  </head>
+
+  <body>
+
+    <h1>PUT YOUR CODE HERE</h1>
+    <h3>NOTE for the team - job opening count in locations within 5 miles of your input city and state. All jobs are 7 days or younger. Chicago, Illinois. Dishwasher</h3>
+<div class="collection" id = 'glassdoor_job_count'></div>
+<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+
+
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/materialize.min.js"></script>
+    <script src="../static/js/relevance.js"></script>
+  </body>
+</html>
