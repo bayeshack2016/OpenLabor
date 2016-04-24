@@ -16,7 +16,7 @@ $(function() {
 
   var options2 = {
     url: function(phrase) {
-      return "http://bayeshack-io.herokuapp.com/search_city?city=" + phrase;
+      return "/search_city?city=" + phrase;
     },
     listLocation: 'results',
     getValue: 'city',
@@ -30,7 +30,7 @@ $(function() {
   var occ_code = '';
   var options3 = {
     url: function(phrase) {
-      return "http://bayeshack-io.herokuapp.com/search_occ?occ_title=" + phrase;
+      return "/search_occ?occ_title=" + phrase;
     },
     listLocation: 'results',
     getValue: function(results) {
@@ -75,7 +75,7 @@ $(function() {
               occ_code = occ_code;
 
 
-          var url = './surface_relevance.html?' +
+          var url = './surface_relevance?' +
             'a_median=' + a_median +
             '&city=' + city +
             '&h_median=' + h_median +

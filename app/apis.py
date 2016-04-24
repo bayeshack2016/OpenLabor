@@ -4,7 +4,11 @@ from flask.ext.jsonpify import jsonify
 
 @app.route('/')
 @app.route('/index')
-def index():
+def home_page():
+    return render_template('home_page.html')
+
+@app.route('/collect_data')
+def collect_data():
     return render_template('collect_data.html')
 
 @app.route('/surface_relevance')
@@ -41,7 +45,13 @@ def search_city():
 @app.route('/search_occ',methods=['GET'])
 def search_occ():
 	query = request.args['occ_title']
-	results = search.find_occ(query)
+	# results = search.find_occ(query)
+	# for r in results:
+	# 	r['inputPhrase'] = query
+	# return jsonify({'results': results})
+	with cursor() as cur:
+		cur.execute("""SELECT DISTINCT occ_title, occ_code FROM msa WHERE occ_title ~~* '%{}%' """.format(query))
+		results = cur.fetchall()
 	for r in results:
 		r['inputPhrase'] = query
 	return jsonify({'results': results})
@@ -55,6 +65,7 @@ def stats_by_state_city_occ():
 		sql="""SELECT state,
 					  city,
 					  occ_title,
+					  occ_code,
 					  tot_emp,
 					  jobs_1000,
 					  h_mean,
