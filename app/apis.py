@@ -1,5 +1,5 @@
 from app import app, cursor, search
-from flask import request
+from flask import request, render_template, send_from_directory
 from flask.ext.jsonpify import jsonify
 
 @app.route('/')
@@ -11,10 +11,10 @@ def index():
 def surface_relevance():
     return render_template('surface_relevance.html')
 
-@app.route('/<path:path>')
-def send_js(path):
+@app.route('/static/<path:path>')
+def send_static(path):
 	print(path)
-	return send_from_directory('static', path)
+	return send_from_directory('/static', path)
 
 
 @app.route('/search_state',methods=['GET'])
@@ -22,25 +22,28 @@ def search_state():
 	with cursor() as cur:
 		query = request.args['query']
 		cur.execute("""SELECT DISTINCT state FROM msa WHERE state ~~* '{}%' """.format(query))
-		return jsonify({'data':{
-			'inputPhrase': query,
-			'results': cur.fetchall()}})
+		results = cur.fetchall()
+		for r in results:
+			r['inputPhrase'] = query
+		return jsonify({'results': results})
+
 
 @app.route('/search_city',methods=['GET'])
 def search_city():
 	state = request.args['state']
 	city = request.args['city']
-	# pdb.set_trace()
-	return jsonify({'data':{
-			'inputPhrase': city,
-			'results': search.find_city(state,city)}})
+	results = search.find_city(state,city)
+	for r in results:
+		r['inputPhrase'] = city
+	return jsonify({'results': results})
 
 @app.route('/search_occ',methods=['GET'])
 def search_occ():
-	occ_title = request.args['occ_title']
-	return jsonify({'data':{
-			'inputPhrase': occ_title,
-			'results': search.find_occ(occ_title)}})
+	query = request.args['occ_title']
+	results = search.find_occ(query)
+	for r in results:
+		r['inputPhrase'] = query
+	return jsonify({'results': results})
 
 
 
