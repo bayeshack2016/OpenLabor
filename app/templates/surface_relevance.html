@@ -3,14 +3,46 @@
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <title>OpenLabor</title>
+
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://api.glassdoor.com/api/api.htm?t.p=62299&t.k=bFtWtvzAmSI&userip=208.90.215.204&useragent=Mozilla/5.0&format=json&v=1&action=jobs-prog&countryId=1&jobTitle=cashier',
+                    dataType: 'jsonp',
+                    type: 'GET',
+                    contentType: "application/json",
+                
+                    success: function(dataWeGotViaJsonp){                        
+                        var text = '';
+                        var len = dataWeGotViaJsonp.response.results.length;                        
+                        text += '<li>' + len + '</li>'
+                        for(var i=0;i<len;i++){
+                            items = dataWeGotViaJsonp.response.results[i];                            
+                            text += '<a href="#!" class="collection-item">' + items.nextJobTitle + '</a>'
+                        }
+
+                        $('#glassdoor_job_progression').html(text);
+                    }
+                    ,
+                    error: function(e) {
+                      console.log(e.message);
+                    }
+                });
+            })
+        </script>
+
   </head>
 
   <body>
 
     <h1>PUT YOUR CODE HERE</h1>
+<div class="collection" id = 'glassdoor_job_progression'></div>
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/materialize.min.js"></script>
-    <script src="../js/relevance.js"></script>
+
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/materialize.min.js"></script>
+    <script src="../static/js/relevance.js"></script>
   </body>
 </html>
