@@ -48,13 +48,15 @@ def stats_by_state_city_occ():
 		print(sql)
 		return jsonify({'data':cur.fetchall()})
 
-@app.route('/a_median_by_state',methods=['GET'])
+@app.route('/a_median_by_state_occ',methods=['GET'])
 def a_median_by_state():
 	with cursor() as cur:
 		# pdb.set_trace()
-		sql="""SELECT state,
+		sql="""SELECT occ_code,
+					  state,
 					  a_mean
-			     FROM msa"""
+			     FROM msa
+			     WHERE occ_code = '{occ_code}'""".format(**request.args)
 
 		cur.execute(sql)
 		print(sql)
