@@ -25,10 +25,11 @@ def stats_by_state_city_occ():
 					  a_median
 				FROM msa
 			   WHERE state ~~* '{state}'
-			     	 AND city ~~* '{city}'""".format(**request.args)
+			     	 AND city ~~* '{city}'
+			     	 AND occ_code = '{occ_code}'""".format(**request.args)
 
 		cur.execute(sql)
-		# print(cur.fetchall())
+		print(sql)
 		return jsonify({'data':cur.fetchall()})
 
 
