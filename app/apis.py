@@ -1,7 +1,23 @@
 import app
 from app import app, cursor
 import pdb
-from flask import request, jsonify
+from flask import request
+from flask.ext.jsonpify import jsonify
+
+
+@app.route('/')
+@app.route('/index')
+def index():
+    return render_template('collect_data.html')
+
+@app.route('/surface_relevance')
+def surface_relevance():
+    return render_template('surface_relevance.html')
+
+@app.route('/<path:path>')
+def send_js(path):
+	print(path)
+	return send_from_directory('static', path)
 
 
 @app.route('/search_state')
@@ -31,5 +47,4 @@ def stats_by_state_city_occ():
 		cur.execute(sql)
 		print(sql)
 		return jsonify({'data':cur.fetchall()})
-
 

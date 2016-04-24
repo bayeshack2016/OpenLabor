@@ -20,7 +20,7 @@ def db():
 
 def cursor():
 	return db().cursor(cursor_factory = psycopg2.extras.RealDictCursor)
-from app import views, apis
+from app import apis
 import config
 
 __conn = None
