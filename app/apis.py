@@ -60,5 +60,25 @@ def a_median_by_state():
 		print(sql)
 		return jsonify({'data':cur.fetchall()})
 
+@app.route('/top_salaries_in_state_by_city',methods=['GET'])
+def top_salaries_in_state_by_city():
+	
+	sql = """SELECT state,
+					city,
+	                a_mean
+		       FROM (SELECT 
+		       			   state,
+		       			   city, 
+		                   a_mean,
+		                   RANK () OVER(PARTITION BY city ORDER BY a_mean DESC) as salary_rank 
+		              FROM msa 
+			         WHERE occ_code ='{occ_code}' AND state = '{state}') r
+	          WHERE salary_rank <= 10""".format(**request.args)
+	with cursor() as cur:
+		print(sql)
+		cur.execute(sql)
+		return jsonify({'data':cur.fetchall()})
+
+
 
 
