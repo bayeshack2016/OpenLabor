@@ -30,14 +30,10 @@ def search_state():
 
 @app.route('/search_city',methods=['GET'])
 def search_city():
-	state = request.args['state']
 	city = request.args['city']
-	results = search.find_city(state,city)
-	if len(results) < 1:
-		with cursor() as cur:
-			cur.execute("""SELECT DISTINCT city FROM msa WHERE state = '{}'
-				AND city ~~* '%{}%' """.format(state,city))
-			results = cur.fetchall()
+	with cursor() as cur:
+		cur.execute("""SELECT DISTINCT city FROM msa WHERE city ~~* '%{}%' """.format(city))
+		results = cur.fetchall()
 	for r in results:
 		r['inputPhrase'] = city
 	return jsonify({'results': results})
