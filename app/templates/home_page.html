@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Emplify</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+  <link type="text/css" rel="stylesheet" href="../static/css/home_style.css">
+</head>
+<body>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+    <div class="center-align">
+      <br><br><img src="../static/images/empoweredlogo.png" width="120" height="120" align="middle">
+      <h1 class="header center blue-text">Emplify</h1>
+      <div class="row center">
+        <h5 class="header col s12 light subtext">Empowering employees, collectively.</h5>
+      </div>
+      <div class="row center">
+        <button id="start-app-btn" class="btn waves-effect waves-light">Get Started</button>
+      </div>
+      <br><br>
+</div>
+    </div>
+  </div>
+
+
+  <div class="container bottomstuff">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-green-text"><i class="material-icons">comment</i></h2>
+            <h5 class="center blue-text">Engage</h5>
+            <p class="light" align ="center">Provide details on your current working conditions</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-green-text"><i class="material-icons">assessment</i></h2>
+
+            <h5 class="center blue-text">Educate</h5>
+            <!--<img src="evaluate.png" width="200" height="200" align="middle">-->
+            <p class="light" align ="center">Assess and compare current employee working conditions to Dept. of Labor benchmarks</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-green-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center blue-text">Enact</h5>
+
+            <p class="light" align ="center">Take proactive action to improve employment experience and seek opportunities</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+
+  <!--  Scripts-->
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/materialize.min.js"></script>
+
+  <script>
+    $(function() {
+      $('#start-app-btn').click(function(e){
+        window.location.replace('./collect_data.html');
+      });
+    });
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,33 @@
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.light-green.lighten-4 {
+  background-color: #4caf50  !important;
+}
+
+.light-green-text {
+  color: #4caf50 !important;
+}
+
+.btn,
+.btn:active,
+.btn:focus,
+.btn:hover {
+  background-color: #2196F3;
+}
+
+.btn {
+  margin-top: 24px;
+}
+
+.subtext {
+  margin-top: -8px;
+}
+
+.bottomstuff {
+  margin-top: -40px;
+}

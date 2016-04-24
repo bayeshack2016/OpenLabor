@@ -3,6 +3,10 @@
   text-transform: capitalize;
 }
 
+#number_of_people {
+  font-weight: bold;
+}
+
 .flow-text {
   margin-top: 8px;
   margin-bottom: 8px;
