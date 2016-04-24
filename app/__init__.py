@@ -1,5 +1,4 @@
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
 import psycopg2 
 import psycopg2.extras
 

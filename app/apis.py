@@ -26,6 +26,23 @@ def search_state():
 			'inputPhrase': query,
 			'results': cur.fetchall()}})
 
+@app.route('/search_city',methods=['GET'])
+def search_city():
+	state = request.args['state']
+	city = request.args['city']
+	# pdb.set_trace()
+	return jsonify({'data':{
+			'inputPhrase': city,
+			'results': search.find_city(state,city)}})
+
+@app.route('/search_occ',methods=['GET'])
+def search_occ():
+	occ_title = request.args['occ_title']
+	return jsonify({'data':{
+			'inputPhrase': occ_title,
+			'results': search.find_occ(occ_title)}})
+
+
 
 @app.route('/stats_by_state_city_occ',methods=['GET'])
 def stats_by_state_city_occ():

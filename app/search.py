@@ -1,4 +1,3 @@
-import app
 from whoosh.index import create_in
 from whoosh.fields import *
 from app import cursor
@@ -38,8 +37,24 @@ def load_cities():
 		writer.commit()
 	return city_index
 
+
+def load_occs():
+	analyzer =  NgramAnalyzer(3)
+	occ_schema = Schema(occ_title=TEXT(stored=True,analyzer=analyzer),
+		occ_code=ID(stored=True))
+	with cursor() as cur:
+		print('Loading occs...')
+		cur.execute('SELECT DISTINCT occ_code, occ_title FROM msa');
+		occ_index = storage.create_index(occ_schema)
+		writer = occ_index.writer()
+		for s in cur.fetchall():
+			writer.add_document(occ_title=s[u'occ_title'],occ_code=s[u'occ_code'])
+		writer.commit()
+	return occ_index
+
 state_index = load_states()
 city_index = load_cities()
+occ_index = load_occs()
 
 
 # For example, to search the "title" field as the user types
@@ -52,11 +67,20 @@ def find_state(query):
 
 def find_city(state, city):
 	with city_index.searcher() as searcher:
-		qp = QueryParser("city", city_index.schema).parse(
-			'city:{} state:{}'.format(city, state))
+		query = 'city:{} state:{}'.format(city, state)
+		qp = QueryParser("city", city_index.schema).parse(query)
 		results = searcher.search(qp)
-		print(results)
+		print('Query: {}\nResult:{}'.format(query,results))
 		return [s['city'] for s in results]
+
+
+def find_occ(occ_title):
+	with occ_index.searcher() as searcher:
+		query = '{}'.format(occ_title)
+		qp = QueryParser("occ_title", occ_index.schema).parse(query)
+		results = searcher.search(qp)
+		print('Query: {}\nResult:{}'.format(query,results))
+		return [{'occ_title':s['occ_title'], 'occ_code':s['occ_code']} for s in results]
 
 
 
