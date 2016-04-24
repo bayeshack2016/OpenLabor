@@ -52,26 +52,26 @@ def load_occs():
 		writer.commit()
 	return occ_index
 
-state_index = load_states()
-city_index = load_cities()
+# state_index = load_states()
+# city_index = load_cities()
 occ_index = load_occs()
 
 
-# For example, to search the "title" field as the user types
-def find_state(query):
-	with state_index.searcher() as searcher:
-		qp = QueryParser("state", state_index.schema).parse(query)
-		results = searcher.search(qp)
-		print('Query: {}\nResult:{}'.format(query,results))
-		return [s['state'] for s in results]
+# # For example, to search the "title" field as the user types
+# def find_state(query):
+# 	with state_index.searcher() as searcher:
+# 		qp = QueryParser("state", state_index.schema).parse(query)
+# 		results = searcher.search(qp)
+# 		print('Query: {}\nResult:{}'.format(query,results))
+# 		return [s['state'] for s in results]
 
-def find_city(state, city):
-	with city_index.searcher() as searcher:
-		query = 'city:{} state:{}'.format(city, state)
-		qp = QueryParser("city", city_index.schema).parse(query)
-		results = searcher.search(qp)
-		print('Query: {}\nResult:{}'.format(query,results))
-		return [s['city'] for s in results]
+# def find_city(state, city):
+# 	with city_index.searcher() as searcher:
+# 		query = 'city:{} state:{}'.format(city, state)
+# 		qp = QueryParser("city", city_index.schema).parse(query)
+# 		results = searcher.search(qp)
+# 		print('Query: {}\nResult:{}'.format(query,results))
+# 		return [s['city'] for s in results]
 
 
 def find_occ(occ_title):
