@@ -20,11 +20,11 @@ def send_static(path):
 @app.route('/search_state',methods=['GET'])
 def search_state():
 	with cursor() as cur:
-		query = request.args['query']
-		cur.execute("""SELECT DISTINCT state FROM msa WHERE state ~~* '{}%' """.format(query))
+		state = request.args['state']
+		cur.execute("""SELECT DISTINCT state FROM msa WHERE state ~~* '{}%' """.format(state))
 		results = cur.fetchall()
 		for r in results:
-			r['inputPhrase'] = query
+			r['inputPhrase'] = state
 		return jsonify({'results': results})
 
 
