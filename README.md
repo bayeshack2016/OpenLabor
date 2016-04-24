@@ -2,7 +2,8 @@
 ## #DOL (Department of Labor)
 Amplifying Employee Empowerment
 
-## Income inequality is a key policy target for the Department of Labor and the White House. The Gini index, a standard measure of inequality, has risen to a level not seen since the 1920's, and it shows no stopping. Although America has added 14 million jobs in the last 8 years and unemployment has fallen from 10% to 5%, average wages remain stagnant.
+## Income inequality
+Income inequality is a key policy target for the Department of Labor and the White House. The Gini index, a standard measure of inequality, has risen to a level not seen since the 1920's, and it shows no stopping. Although America has added 14 million jobs in the last 8 years and unemployment has fallen from 10% to 5%, average wages remain stagnant.
 
 Our project aims to give American employees tools and information needed to make change and improve their lives. Emplify follows a 3-E approach:
 1. **Engage**: Provide details on current working conditions
