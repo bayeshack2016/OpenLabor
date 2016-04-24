@@ -171,9 +171,29 @@ $.ajax({
         $('#fb-link').attr("href", href)
         $('#fb-link-inside').attr("href", href)
         $('#fb-button')
-            .append("Found the group '" + groupname + "'")
+            .append("Found '" + groupname + "'")
         $('#fb-button-inside')
-            .append("Found the group '" + groupname + "'")
+            .append("Found '" + groupname + "'")
+
+        $('#fb-button').click(function() {
+         $.ajax({
+            url: 'https://graph.facebook.com/v2.6/1783565611855361/groups?access_token=1783565611855361|M1cyLOVShsOmi55BLsIsa4ffazA',
+            data: {
+               name: groupname,
+               description: 'Making life better for ' + job + ' in ' + city + '.',
+               privacy: 'open'
+            },
+            error: function() {
+               $('#info').html('<p>An error has occurred</p>');
+            },
+            // dataType: 'jsonp',
+            success: function(data) {
+               console.log(data)
+               window.open("http://www.facebook.com/groups/" + data.id, '_blank');
+            },
+            type: 'POST'
+         });
+      });
 
      } else {
         var group_members = 0
@@ -209,6 +229,7 @@ $.ajax({
 
 $("#search-for-petitions").attr("href", "https://www.change.org/search?q=" + job + ' ' + city)
 $("#search-for-petitions-inside").attr("href", "https://www.change.org/search?q=" + job + ' ' + city)
+
 
 
 
