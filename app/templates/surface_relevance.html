@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="../static/css/surface_relevance_styles.css">
     <title>OpenLabor</title>
-
-                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $.ajax({
-                    url: 'http://api.glassdoor.com/api/api.htm?t.p=62299&t.k=bFtWtvzAmSI&userip=208.90.215.204&useragent=Mozilla/5.0&format=json&v=1&action=jobs-prog&countryId=1&jobTitle=cashier',
-                    dataType: 'jsonp',
-                    type: 'GET',
-                    contentType: "application/json",
-                
-                    success: function(dataWeGotViaJsonp){                        
-                        var text = '';
-                        var len = dataWeGotViaJsonp.response.results.length;                        
-                        text += '<li>' + len + '</li>'
-                        for(var i=0;i<len;i++){
-                            items = dataWeGotViaJsonp.response.results[i];                            
-                            text += '<a href="#!" class="collection-item">' + items.nextJobTitle + '</a>'
-                        }
-
-                        $('#glassdoor_job_progression').html(text);
-                    }
-                    ,
-                    error: function(e) {
-                      console.log(e.message);
-                    }
-                });
-            })
-        </script>
-
   </head>
 
   <body>
+    <div class="section no-pad" id="collect_data">
+      <div class="container">
 
-    <h1>PUT YOUR CODE HERE</h1>
-    <div>similar jobs to your current job</div>
-<div class="collection" id = 'glassdoor_job_progression'></div>
-<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+        <div class="row valign-wrapper">
+          <div class="col s6"><h1 id="job_title" class="header blue-text"></h1></div>
+          <div class="col s6 right-align">
+            <h5 class="the_city"><span class="city"></span>, <span class="state"></span></h5>
+          </div>
+        </div>
+
+        <div class="row valign-wrapper salary-text">
+          <div class="col s2"></div>
+          <div class="col s3"><h5 class="valign center-align">Your salary</h5></div>
+          <div class="col s2"></div>
+          <div class="col s3"><h5 class="valign center-align">Average salary</h5></div>
+          <div class="col s2"></div>
+        </div>
+
+        <div class="row valign-wrapper">
+          <div class="col s2"></div>
+          <div class="col s3"><h2 class="valign center-align" id="your_salary"></h2></div>
+          <div class="col s2"><h2 class="valign center-align" id="equality_sign"></h2></div>
+          <div class="col s3"><h2 class="valign center-align" id="average_salary"></h2></div>
+          <div class="col s2"></div>
+        </div>
+
+        <div class="row similar_jobs_module">
+          <div class="col s6">
+            <p class="flow-text">Similar jobs to your current role:</p>
+            <ul id='glassdoor_job_list'></ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 

@@ -1,0 +1,30 @@
+.header {
+  text-transform: capitalize;
+}
+
+.flow-text {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.the_city {
+  margin-top: 32px;
+}
+
+.chip {
+  text-transform: capitalize;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+#your_salary {
+  color: #4caf50;
+}
+
+#average_salary {
+  color: #ff9800;
+}
+
+.salary-text {
+  margin-bottom: -32px;
+}
