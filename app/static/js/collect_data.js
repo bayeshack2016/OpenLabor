@@ -1,32 +1,48 @@
 $(function() {
 
-  // var options = {
-  //   url: function(phrase) {
-  //     return "https://bayeshack-io.herokuapp.com/search_state?query=" + phrase;
-  //   },
-  //   listLocation: function(retVal) {
+  var options = {
+    url: function(phrase) {
+      return "http://bayeshack-io.herokuapp.com/search_state?state=" + phrase;
+    },
+    listLocation: 'results',
+    getValue: 'state',
+    ajaxSettings: {
+      dataType: 'JSONP'
+    }
+  };
 
-  //     var text = '',
-  //         data = retVal.data.results,
-  //         length = data.length,
-  //         item;
+  $('#state').easyAutocomplete(options);
 
-  //     for(var i = 0; i < length; i++) {
-  //       item = data[i];
-  //       text += '<li class="collection-item">' + item.state + '</li>';
-  //     }
 
-  //     $('#state_collection').html(text);
+  var options2 = {
+    url: function(phrase) {
+      return "http://bayeshack-io.herokuapp.com/search_city?city=" + phrase;
+    },
+    listLocation: 'results',
+    getValue: 'city',
+    ajaxSettings: {
+      dataType: 'JSONP'
+    }
+  };
 
-  //     return data;
-  //   },
-  //   matchResponseProperty: 'inputPhrase',
-  //   ajaxSettings: {
-  //     dataType: 'JSONP'
-  //   }
-  // };
+  $('#city').easyAutocomplete(options2);
 
-  // $('#state').easyAutocomplete(options);
+  var occ_code = '';
+  var options3 = {
+    url: function(phrase) {
+      return "http://bayeshack-io.herokuapp.com/search_occ?occ_title=" + phrase;
+    },
+    listLocation: 'results',
+    getValue: function(results) {
+      occ_code = results.occ_code;
+      return results.occ_title;
+    },
+    ajaxSettings: {
+      dataType: 'JSONP'
+    }
+  };
+
+  $('#job_title').easyAutocomplete(options3);
 
 
   $('#the_form').submit(function(e){
@@ -43,9 +59,9 @@ $(function() {
         method: 'GET',
         dataType: 'jsonp',
         data: {
-          occ_code: '11-2011',
-          city: 'Anchorage',
-          state: 'AK'
+          occ_code: occ_code,
+          city: city,
+          state: state
         },
         success: function (data) {
           var params = data.data[0],
@@ -56,7 +72,7 @@ $(function() {
               state = params.state,
               tot_emp = params.tot_emp,
               salary = $('#salary').val(),
-              occ_code = $('#job_title').val();
+              occ_code = occ_code;
 
 
           var url = './surface_relevance?' +
