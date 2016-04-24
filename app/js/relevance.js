@@ -2,64 +2,85 @@ $(function() {
   // Put surface relevance javascript here
 
 
-
-
 function income_to_color(income, mn, mx) {
     return Math.round(9*(income-mn)/(mx-mn))
 }
 
-states_arr = [{state: 'AZ', income: 10}, {state: 'NE', income:12}, {state:'CA',  income:14}, {state:'TX',  income:20}]
-
-incomes = []
-for(i=0; i < states_arr.length; i++){
-    incomes[i] = states_arr[i].income
-    }
-
-Array.prototype.max = function() {
-  return Math.max.apply(null, this);
-};
-
-Array.prototype.min = function() {
-  return Math.min.apply(null, this);
-};
-
-mn = incomes.min()
-mx = incomes.max()
-
-dat = {}
-for(i=0; i < states_arr.length; i++){
-    dat[states_arr[i].state] = {'Median Income': states_arr[i].income,
-                                'fillKey': income_to_color(states_arr[i].income, mn, mx)}
-}
-console.log('data:')
-console.log(dat)
-
-var election = new Datamap({
-  scope: 'usa',
-  element: document.getElementById('container'),
-  geographyConfig: {
-    highlightBorderColor: '#bada55',
-   popupTemplate: function(geography, data) {
-      return '<div class="hoverinfo">' + geography.properties.name + ' Median Salary:' +  data['Median Income'] + ' '
-    },
-    highlightBorderWidth: 3,
+$.ajax({
+  url: 'https://bayeshack-io.herokuapp.com/top_salaries_in_state_by_city',
+  data: {
+     format: 'json',
+     state: 'CA',
+     occ_code: '00-0000'
   },
+  error: function() {
+     console.log('An error has occurred.');
+  },
+  dataType: 'jsonp',
+  success: function(data) {
+    console.log(data)
+    states_arr = data
 
-  fills: {
-    0: '#e3f2fd',
-    1: '#bbdefb',
-    2: '#90caf9',
-    3: '#64b5f6',
-    4: '#42a5f5',
-    5: '#2196f3',
-    6: '#1e88e5',
-    7: '#1976d2',
-    8: '#1565c0',
-    9: '#0d47a1',
-  defaultFill: '#e3f2fd'
-},
-data:dat});
-election.labels();
+    incomes = []
+    for(i=0; i < states_arr.length; i++){
+        incomes[i] = states_arr[i].income
+        }
+
+    Array.prototype.max = function() {
+      return Math.max.apply(null, this);
+    };
+
+    Array.prototype.min = function() {
+      return Math.min.apply(null, this);
+    };
+
+    mn = incomes.min()
+    mx = incomes.max()
+
+    dat = {}
+    for(i=0; i < states_arr.length; i++){
+        dat[states_arr[i].state] = {'Median Income': states_arr[i].income,
+                                    'fillKey': income_to_color(states_arr[i].income, mn, mx)}
+    }
+    console.log('data:')
+    console.log(dat)
+
+    var election = new Datamap({
+      scope: 'usa',
+      element: document.getElementById('container'),
+      geographyConfig: {
+        highlightBorderColor: '#bada55',
+       popupTemplate: function(geography, data) {
+          return '<div class="hoverinfo">' + geography.properties.name + ' Median Salary:' +  data['Median Income'] + ' '
+        },
+        highlightBorderWidth: 3,
+      },
+
+      fills: {
+        0: '#e3f2fd',
+        1: '#bbdefb',
+        2: '#90caf9',
+        3: '#64b5f6',
+        4: '#42a5f5',
+        5: '#2196f3',
+        6: '#1e88e5',
+        7: '#1976d2',
+        8: '#1565c0',
+        9: '#0d47a1',
+      defaultFill: '#e3f2fd'
+    },
+    data:dat});
+    election.labels();
+
+
+  }
+});
+
+
+
+// states_arr = [{state: 'AZ', income: 10}, {state: 'NE', income:12}, {state:'CA',  income:14}, {state:'TX',  income:20}]
+
+
 
 
 
