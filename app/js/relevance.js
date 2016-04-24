@@ -7,7 +7,7 @@ function income_to_color(income, mn, mx) {
 }
 
 $.ajax({
-  url: 'https://bayeshack-io.herokuapp.com/top_salaries_in_state_by_city',
+  url: 'https://bayeshack-io.herokuapp.com/a_median_by_state',
   data: {
      format: 'json',
      state: 'CA',
