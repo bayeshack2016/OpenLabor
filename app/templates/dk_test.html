@@ -12,12 +12,12 @@
                     dataType: 'jsonp',
                     type: 'GET',
                     contentType: "application/json",
-                
-                    success: function(dataWeGotViaJsonp){                        
+
+                    success: function(dataWeGotViaJsonp){
                         var text = '';
-                        var len = dataWeGotViaJsonp.response.cities.length;                        
+                        var len = dataWeGotViaJsonp.response.cities.length;
                         for(var i=0;i<len;i++){
-                            items = dataWeGotViaJsonp.response.cities[i];                            
+                            items = dataWeGotViaJsonp.response.cities[i];
                             text += '<a href="#!" class="collection-item">' + items.name + '<span class="new badge">'
                             text += items.numJobs + '</span></a>'
                         }

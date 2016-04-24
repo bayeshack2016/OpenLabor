@@ -1,4 +1,5 @@
-.header {
+.header,
+.job_title {
   text-transform: capitalize;
 }
 
@@ -15,6 +16,7 @@
   text-transform: capitalize;
   margin-right: 4px;
   margin-bottom: 4px;
+  cursor: pointer;
 }
 
 #your_salary {
@@ -27,4 +29,49 @@
 
 .salary-text {
   margin-bottom: -32px;
+}
+
+[data-tooltip]:hover, [data-tooltip]:focus {
+  background-color: #e4e4e4;
+}
+
+
+.btn,
+.btn:active,
+.btn:focus,
+.btn:hover {
+  background-color: #2196F3;
+}
+
+
+.card.medium {
+    width: 400px;
+}
+
+/* Start of Column CSS */
+#container2 {
+    clear:left;
+    float:left;
+    width:100%;
+    overflow:hidden;
+}
+#container1 {
+    float:left;
+    width:100%;
+    position:relative;
+    right:50%;
+}
+#col1 {
+    float:left;
+    width:46%;
+    position:relative;
+    left:52%;
+    overflow:hidden;
+}
+#col2 {
+    float:left;
+    width:46%;
+    position:relative;
+    left:56%;
+    overflow:hidden;
 }
