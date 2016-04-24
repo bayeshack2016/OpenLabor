@@ -7,3 +7,15 @@ Contributors:
 - Ali Razfar
 - Arezu Aghaseyedjavadi 
 - Ryan George
+
+Sources:
+
+– MSA M2015
+
+Stack:
+
+- Python3
+– Flask
+– PostgreSQL
+– Whoosh (full-text search)
+
