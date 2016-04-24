@@ -9,13 +9,12 @@ Contributors:
 - Ryan George
 
 Sources:
-
-– MSA M2015
+- BLS OES 2015
+- Glassdoor API
 
 Stack:
-
 - Python3
-– Flask
-– PostgreSQL
-– Whoosh (full-text search)
+- Flask
+- PostgreSQL
+- Whoosh (full-text search)
 
