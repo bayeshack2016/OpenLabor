@@ -59,7 +59,7 @@ $(function() {
               occ_code = $('#job_title').val();
 
 
-          var url = './surface_relevance.html?' +
+          var url = './surface_relevance?' +
             'a_median=' + a_median +
             '&city=' + city +
             '&h_median=' + h_median +
