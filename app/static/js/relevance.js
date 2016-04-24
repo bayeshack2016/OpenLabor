@@ -171,9 +171,9 @@ $.ajax({
         $('#fb-link').attr("href", href)
         $('#fb-link-inside').attr("href", href)
         $('#fb-button')
-            .append("Found the group '" + groupname + "'")
+            .append("Found '" + groupname + "'")
         $('#fb-button-inside')
-            .append("Found the group '" + groupname + "'")
+            .append("Found '" + groupname + "'")
 
         $('#fb-button').click(function() {
          $.ajax({
