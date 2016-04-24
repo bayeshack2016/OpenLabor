@@ -48,15 +48,16 @@ def stats_by_state_city_occ():
 		print(sql)
 		return jsonify({'data':cur.fetchall()})
 
-@app.route('/a_median_by_state_occ',methods=['GET'])
+@app.route('/a_mean_by_state_occ',methods=['GET'])
 def a_median_by_state():
 	with cursor() as cur:
 		# pdb.set_trace()
 		sql="""SELECT occ_code,
 					  state,
-					  a_mean
+					  SUM(a_mean*tot_emp)/SUM(tot_emp) AS a_mean
 			     FROM msa
-			     WHERE occ_code = '{occ_code}'""".format(**request.args)
+			     WHERE occ_code = '{occ_code}'
+			     GROUP BY 1,2""".format(**request.args)
 
 		cur.execute(sql)
 		print(sql)
