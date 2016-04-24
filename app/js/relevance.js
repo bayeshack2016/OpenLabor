@@ -4,9 +4,35 @@ $(function() {
 
 
 
+function income_to_color(income, mn, mx) {
+    return Math.round(9*(income-mn)/(mx-mn))
+}
 
+states_arr = [{state: 'AZ', income: 10}, {state: 'NE', income:12}, {state:'CA',  income:14}, {state:'TX',  income:20}]
 
+incomes = []
+for(i=0; i < states_arr.length; i++){
+    incomes[i] = states_arr[i].income
+    }
 
+Array.prototype.max = function() {
+  return Math.max.apply(null, this);
+};
+
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
+
+mn = incomes.min()
+mx = incomes.max()
+
+dat = {}
+for(i=0; i < states_arr.length; i++){
+    dat[states_arr[i].state] = {'Median Income': states_arr[i].income,
+                                'fillKey': income_to_color(states_arr[i].income, mn, mx)}
+}
+console.log('data:')
+console.log(dat)
 
 var election = new Datamap({
   scope: 'usa',
@@ -14,230 +40,231 @@ var election = new Datamap({
   geographyConfig: {
     highlightBorderColor: '#bada55',
    popupTemplate: function(geography, data) {
-      return '<div class="hoverinfo">' + geography.properties.name + 'Electoral Votes:' +  data.electoralVotes + ' '
+      return '<div class="hoverinfo">' + geography.properties.name + ' Median Salary:' +  data['Median Income'] + ' '
     },
     highlightBorderWidth: 3,
-    offsetWidth: 2
-
   },
 
   fills: {
-  'Republican': '#CC4731',
-  'Democrat': '#306596',
-  'Heavy Democrat': '#667FAF',
-  'Light Democrat': '#A9C0DE',
-  'Heavy Republican': '#CA5E5B',
-  'Light Republican': '#EAA9A8',
-  defaultFill: '#EDDC4E'
+    0: '#e3f2fd',
+    1: '#bbdefb',
+    2: '#90caf9',
+    3: '#64b5f6',
+    4: '#42a5f5',
+    5: '#2196f3',
+    6: '#1e88e5',
+    7: '#1976d2',
+    8: '#1565c0',
+    9: '#0d47a1',
+  defaultFill: '#e3f2fd'
 },
-data:{
-  "AZ": {
-      "fillKey": "Republican",
-      "electoralVotes": 5
-  },
-  "CO": {
-      "fillKey": "Light Democrat",
-      "electoralVotes": 5
-  },
-  "DE": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "FL": {
-      "fillKey": "UNDECIDED",
-      "electoralVotes": 29
-  },
-  "GA": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "HI": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "ID": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "IL": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "IN": {
-      "fillKey": "Republican",
-      "electoralVotes": 11
-  },
-  "IA": {
-      "fillKey": "Light Democrat",
-      "electoralVotes": 11
-  },
-  "KS": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "KY": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "LA": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "MD": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "ME": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "MA": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "MN": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "MI": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "MS": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "MO": {
-      "fillKey": "Republican",
-      "electoralVotes": 13
-  },
-  "MT": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "NC": {
-      "fillKey": "Light Republican",
-      "electoralVotes": 32
-  },
-  "NE": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "NV": {
-      "fillKey": "Heavy Democrat",
-      "electoralVotes": 32
-  },
-  "NH": {
-      "fillKey": "Light Democrat",
-      "electoralVotes": 32
-  },
-  "NJ": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "NY": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "ND": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "NM": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "OH": {
-      "fillKey": "UNDECIDED",
-      "electoralVotes": 32
-  },
-  "OK": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "OR": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "PA": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "RI": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "SC": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "SD": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "TN": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "TX": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "UT": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "WI": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "VA": {
-      "fillKey": "Light Democrat",
-      "electoralVotes": 32
-  },
-  "VT": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "WA": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "WV": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "WY": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "CA": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "CT": {
-      "fillKey": "Democrat",
-      "electoralVotes": 32
-  },
-  "AK": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "AR": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  },
-  "AL": {
-      "fillKey": "Republican",
-      "electoralVotes": 32
-  }
-}
-});
+data:dat});
 election.labels();
 
 
 
-
+dat = {
+  "AZ": {
+      "fillKey": "Republican",
+      "Median Income": 5
+  },
+  "CO": {
+      "fillKey": "Light Democrat",
+      "Median Income": 5
+  },
+  "DE": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "FL": {
+      "fillKey": "UNDECIDED",
+      "Median Income": 29
+  },
+  "GA": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "HI": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "ID": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "IL": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "IN": {
+      "fillKey": "Republican",
+      "Median Income": 11
+  },
+  "IA": {
+      "fillKey": "Light Democrat",
+      "Median Income": 11
+  },
+  "KS": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "KY": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "LA": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "MD": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "ME": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "MA": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "MN": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "MI": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "MS": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "MO": {
+      "fillKey": "Republican",
+      "Median Income": 13
+  },
+  "MT": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "NC": {
+      "fillKey": "Light Republican",
+      "Median Income": 32
+  },
+  "NE": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "NV": {
+      "fillKey": "Heavy Democrat",
+      "Median Income": 32
+  },
+  "NH": {
+      "fillKey": "Light Democrat",
+      "Median Income": 32
+  },
+  "NJ": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "NY": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "ND": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "NM": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "OH": {
+      "fillKey": "UNDECIDED",
+      "Median Income": 32
+  },
+  "OK": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "OR": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "PA": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "RI": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "SC": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "SD": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "TN": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "TX": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "UT": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "WI": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "VA": {
+      "fillKey": "Light Democrat",
+      "Median Income": 32
+  },
+  "VT": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "WA": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "WV": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "WY": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "CA": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "CT": {
+      "fillKey": "Democrat",
+      "Median Income": 32
+  },
+  "AK": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "AR": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  },
+  "AL": {
+      "fillKey": "Republican",
+      "Median Income": 32
+  }
+}
 
 
 
