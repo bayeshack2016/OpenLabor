@@ -75,7 +75,7 @@ $(function() {
               occ_code = occ_code;
 
 
-          var url = './surface_relevance?' +
+          var url = './surface_relevance.html?' +
             'a_median=' + a_median +
             '&city=' + city +
             '&h_median=' + h_median +
