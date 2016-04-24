@@ -24,7 +24,7 @@ $.ajax({
   },
   dataType: 'jsonp',
   success: function(data) {
-    console.log(data)
+    // console.log(data)
     states_arr = data
 
     incomes = []
@@ -34,14 +34,14 @@ $.ajax({
 
     mn = incomes.min()
     mx = incomes.max()
-    console.log(incomes)
+    // console.log(incomes)
     dat = {}
     for(i=0; i < states_arr.data.length; i++){
         dat[states_arr.data[i].state] = {'Median Income': '$' + Math.round(incomes[i]),
                                     'fillKey': income_to_color(incomes[i], mn, mx)}
     }
-    console.log('data:')
-    console.log(dat)
+    // console.log('data:')
+    // console.log(dat)
 
     var election = new Datamap({
       scope: 'usa',
@@ -69,75 +69,21 @@ $.ajax({
     },
     data:dat});
     election.labels();
-    document.getElementById('container').attr("align","center");
   }
 });
 
 
-// Bar graph
 
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
-
-var y = d3.scale.linear()
-    .range([height, 0]);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(10);
-
-var svg = d3.select("body").insert("svg", "#create-button")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-x.domain(['You', 'Local Average', 'National Average']);
-y.domain([0,20]);
-
-svg.append("g")
-  .attr("class", "x axis")
-  .attr("transform", "translate(0," + height + ")")
-  .call(xAxis);
-
-svg.append("g")
-  .attr("class", "y axis")
-  .call(yAxis)
-.append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("y", 6)
-  .attr("dy", ".71em")
-  .style("text-anchor", "end")
-  .text("Pay");
-
-svg.selectAll(".bar")
-  .data([{nm: 'You', salary: 10}, {nm: 'Local Average', salary: 12}, {nm: 'National Average', salary: 12}])
-.enter().append("rect")
-  .attr("class", "bar")
-  .attr("x", function(d) { return x(d.nm); })
-  .attr("width", x.rangeBand())
-  .attr("y", function(d) { return y(d.salary); })
-  .attr("height", function(d) { return height - y(d.salary); });
-
-
-
-
-
-
-
-var job = 'Teller'
+var job = 'Miner'
 var city = 'Minneapolis'
 var groupname = 'Empowering ' + job + 's in ' + city
+var n_occs = 704
+
+// When people join together and raise their voices about an issue they care about, the message is hard to ignore.
+// Starting a petition on Change.org helps you quickly build awareness for your cause, mobilize supporters, and propose a solution directly to the person who can make the change.
+
+$('#fb-explain').append('The people who understand you best are those who do what you do, where you do it, every day. Power comes through working with others and organizing around important topics. There are about ' + n_occs +  ' people working as ' + job + 's in your area. Connect with them, share advice, and advocate for common needs. We have created a Facebook group specifically for this purpose; join it and start sharing today!')
 
 var groupbase = 'https://www.facebook.com/groups/'
 var groupid = 0
@@ -148,11 +94,13 @@ $.ajax({
      format: 'json'
   },
   error: function() {
+    console.log('didnt work at all')
      $('#info').html('<p>An error has occurred</p>');
   },
   dataType: 'jsonp',
   success: function(data) {
-     console.log(data)
+     groupname = 'Empowering ' + job + 's in ' + city
+     console.log(groupname)
      var text = ''
      for (i = 0; i < data.data.length; i++) {
         nm = data.data[i].name
@@ -165,9 +113,13 @@ $.ajax({
             }
      }
      if(text == ''){
-        $("#create-button").show();
-        $('#create-button')
-        .append("Found the group '" + groupname + "'")
+        console.log("no group found")
+        $('#fb-link').attr("href", href)
+        $('#fb-link-inside').attr("href", href)
+        $('#fb-button')
+            .append("Found the group '" + groupname + "'")
+        $('#fb-button-inside')
+            .append("Found the group '" + groupname + "'")
 
      } else {
         var group_members = 0
@@ -180,14 +132,19 @@ $.ajax({
           success: function(data) {
             // group_members = data.
             group_members = data.data.length
-            console.log(data)
+            // console.log(data)
           }
         });
-        text = 'join "' + text + '"'//'" (' + group_members + ' members)');
-    console.log(text)
-     $('#join-button')
-         .append(text + '"');
-     $("#join-button").show();
+        var text = 'Join "' + job + 's in ' + city + '"'
+        console.log('found')
+
+
+         $('#fb-button')
+             .append(text + '"');
+         $('#fb-link').attr("href", href)
+         $('#fb-button-inside')
+             .append(text + '"');
+         $('#fb-link-inside').attr("href", href)
 
     }
   },
@@ -209,14 +166,17 @@ $('#create-button').click(function() {
       },
       // dataType: 'jsonp',
       success: function(data) {
-         console.log(data)
+         // console.log(data)
       },
       type: 'POST'
    });
 });
 
-$("#campaign-button").attr("href", "https://www.change.org/search?q=" + job + ' ' + city)
+$("#search-for-petitions").attr("href", "https://www.change.org/search?q=" + job + ' ' + city)
+$("#search-for-petitions-inside").attr("href", "https://www.change.org/search?q=" + job + ' ' + city)
 
+
+$("#campaign-button").attr("href", "https://www.change.org/search?q=" + job + ' ' + city)
 
 
 
