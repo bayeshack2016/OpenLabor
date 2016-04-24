@@ -1,9 +1,6 @@
-import app
-from app import app, cursor
-import pdb
+from app import app, cursor, search
 from flask import request
 from flask.ext.jsonpify import jsonify
-
 
 @app.route('/')
 @app.route('/index')
@@ -20,11 +17,15 @@ def send_js(path):
 	return send_from_directory('static', path)
 
 
-@app.route('/search_state')
+@app.route('/search_state',methods=['GET'])
 def search_state():
-	with db().cursor() as cur:
-		cur.execute("SELECT * FROM msa LIMIT 1")
-		return str(''.join(cur.fetchall()))
+	with cursor() as cur:
+		query = request.args['query']
+		cur.execute("""SELECT DISTINCT state FROM msa WHERE state ~~* '{}%' """.format(query))
+		return jsonify({'data':{
+			'inputPhrase': query,
+			'results': cur.fetchall()}})
+
 
 @app.route('/stats_by_state_city_occ',methods=['GET'])
 def stats_by_state_city_occ():

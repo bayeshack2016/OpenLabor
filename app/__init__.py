@@ -3,6 +3,9 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import psycopg2 
 import psycopg2.extras
 
+import config
+__conn = None
+
 app = Flask(__name__,static_url_path='')
 app.config.from_object('config')
 
@@ -20,7 +23,7 @@ def db():
 
 def cursor():
 	return db().cursor(cursor_factory = psycopg2.extras.RealDictCursor)
-from app import apis
-import config
 
-__conn = None
+
+from app import apis
+

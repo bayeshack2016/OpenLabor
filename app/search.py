@@ -1,3 +1,4 @@
+import app
 from whoosh.index import create_in
 from whoosh.fields import *
 from app import cursor
@@ -44,8 +45,9 @@ city_index = load_cities()
 # For example, to search the "title" field as the user types
 def find_state(query):
 	with state_index.searcher() as searcher:
-		query = QueryParser("state", state_index.schema).parse(query)
-		results = searcher.search(query)
+		qp = QueryParser("state", state_index.schema).parse(query)
+		results = searcher.search(qp)
+		print('Query: {}\nResult:{}'.format(query,results))
 		return [s['state'] for s in results]
 
 def find_city(state, city):
