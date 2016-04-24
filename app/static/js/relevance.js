@@ -22,7 +22,7 @@ $(function() {
   }
 
   $.ajax({
-      url: 'http://api.glassdoor.com/api/api.htm?t.p=62299&t.k=bFtWtvzAmSI&userip=208.90.215.204&useragent=Mozilla/5.0&format=json&v=1&action=jobs-prog&countryId=1&jobTitle=' + occ_title,
+      url: 'http://api.glassdoor.com/api/api.htm?t.p=62299&t.k=bFtWtvzAmSI&userip=208.90.215.204&useragent=Mozilla/5.0&format=json&v=1&action=jobs-prog&countryId=1&jobTitle=' + occ_title.substring(0, occ_title.length - 1),
       dataType: 'jsonp',
       type: 'GET',
       contentType: "application/json",

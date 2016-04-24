@@ -12,17 +12,17 @@ Our project aims to give American employees tools and information needed to make
 
 ## Engage
 We tell the individual the story of how transparency and collective can help improve their conditions.
-
+![Engage](https://github.com/bayeshack2016/OpenLabor/tree/master/app/static/images/home.png)
 ## Educate
 We give employees key information about where they stand in the job market. We provide local and national benchmarks, and compare their current salary to these numbers. We also inform individuals of new opportunities to pursue relative to their skills, and what financial benefit they might expect to get from these opportunities.
-
+![Form](https://github.com/bayeshack2016/OpenLabor/tree/master/app/static/images/form.png)
 ## Enact
 We seek to empower individuals to take collective action by connecting with others in similar situations. We group the individual with others working similar jobs in the same area, and provide two platforms for action:
-
+![Results](https://github.com/bayeshack2016/OpenLabor/tree/master/app/static/images/relevance.png)
 #### Enact initiatives
 1. A Facebook group specific to that group in that time. If no Facebook groups already exists, we provide them the opportunity to found a new group.
 2. Links to relevant change.org petitions. These empower the individual to establish a collective voice and spread awareness about employee issues.
-
+![Enact](https://github.com/bayeshack2016/OpenLabor/tree/master/app/static/images/act.png)
 # Outcome
 Our goal is to empower individuals with a safe environment and community to take proactive action on their employment conditions.
 
