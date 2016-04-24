@@ -3,6 +3,7 @@
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="../static/css/simptip.min.css">
     <link type="text/css" rel="stylesheet" href="../static/css/surface_relevance_styles.css">
     <title>OpenLabor</title>
   </head>
@@ -12,7 +13,7 @@
       <div class="container">
 
         <div class="row valign-wrapper">
-          <div class="col s6"><h1 id="job_title" class="header blue-text"></h1></div>
+          <div class="col s6"><h1 class="job_title" class="header blue-text"></h1></div>
           <div class="col s6 right-align">
             <h5 class="the_city"><span class="city"></span>, <span class="state"></span></h5>
           </div>
@@ -35,17 +36,96 @@
         </div>
 
         <div class="row similar_jobs_module">
-          <div class="col s6">
+          <div class="col s12 center-align">
             <p class="flow-text">Similar jobs to your current role:</p>
             <ul id='glassdoor_job_list'></ul>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col s12">
+            <div id="the_map" align="center" style="position:relative;width: 800px; height: 420px; margin: auto;"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 center-align">
+            <p class="flow-text">Join <span id="number_of_people"></span> <span class="job_title"></span>s to take action:</p>
+          </div>
+        </div>
+
+
+
+
+<div id="container2">
+  <div id="container1">
+    <div id="col1">
+      <div class="card medium">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="../static/images/fb_meet.png">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4" id="talk-title">Engage with others like you.<i class="material-icons right"></i></span>
+          <br/>
+          <br/>
+          <div class="row center">
+             <a id="fb-link"><button id="fb-button" class="btn btn-large waves-effect waves-light"></button></a>
+             </div>
+
+           </div>
+           <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Join with others like you<i class="material-icons right">close</i></span>
+          <p id="fb-explain"></p>
+           <div class="row center">
+             <a id="fb-link-inside"><button id="fb-button-inside" class="btn btn-large waves-effect waves-light"></button></a>
+             </div>
+        </div>
+        </div>
+      </div>
+    <div id="col2">
+      <div class="card medium">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="../static/images/petition.png">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Take a stand with your peers.<i class="material-icons right"></i></span>
+
+          <div class="row center">
+             <a id="search-for-petitions"><button class="btn waves-effect waves-light">Search for petitions</button></a>
+             <br></br>
+             <a href="https://www.change.org/start-a-petition?step=ask"><button id="start-a-petition" class="btn waves-effect waves-light">Start a petition</button></a>
+          </div>
+
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Start a Petition<i class="material-icons right">close</i></span>
+          <p>When people join together and raise their voices about an issue they care about, the message is hard to ignore.
+Starting a petition on Change.org helps you quickly build awareness for your cause, mobilize supporters, and propose a solution directly to the person who can make the change.</p>
+<div class="row center">
+             <a id="search-for-petitions-inside"><button class="btn waves-effect waves-light">Search for petitions</button></a>
+             <br></br>
+             <a href="https://www.change.org/start-a-petition?step=ask"><button id="start-a-petition" class="btn waves-effect waves-light">Start a petition</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
       </div>
     </div>
 
 
 
     <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/topojson.min.js"></script>
+    <script src="../static/js/d3.min.js"></script>
+    <script src="../static/js/datamaps.usa.min.js"></script>
     <script src="../static/js/materialize.min.js"></script>
     <script src="../static/js/relevance.js"></script>
   </body>
