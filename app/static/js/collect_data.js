@@ -72,7 +72,7 @@ $(function() {
               state = params.state,
               tot_emp = params.tot_emp,
               salary = $('#salary').val(),
-              occ_code = occ_code;
+              occ_code = params.occ_code;
 
 
           var url = './surface_relevance?' +
